@@ -156,7 +156,10 @@ def _get_python_bin(repository_ctx):
     python_bin = repository_ctx.os.environ.get(_PYTHON_BIN_PATH)
     if python_bin != None:
         return python_bin
-    if repository_ctx.attr.python_version == "3":
+
+    if repository_ctx.attr.python_bin != "":
+        python_bin_path = repository_ctx.attr.python_bin
+    elif repository_ctx.attr.python_version == "3":
         python_bin_path = repository_ctx.which("python3")
     elif repository_ctx.attr.python_version == "2":
         python_bin_path = repository_ctx.which("python2")
@@ -398,6 +401,8 @@ python_configure(name = "local_config_python")
 
 Args:
   name: A unique name for this workspace rule.
+  python_bin: Manually specify a python interpreter, i.e. "/usr/bin/python3". Useful for hermetic builds
+      that have their own python versions.
   python_version: If set to "3", will build for Python 3, i.e. will build
       against the installation corresponding to the binary returned by
       `which python3`.
