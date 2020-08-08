@@ -158,7 +158,7 @@ def _get_python_bin(repository_ctx):
         return python_bin_path
 
     if repository_ctx.attr.python_interpreter_target != None:
-        python_bin_path = rctx.path(repository_ctx.attr.python_interpreter_target)
+        python_bin_path = repository_ctx.path(repository_ctx.attr.python_interpreter_target)
         return str(python_bin_path)
     
     if repository_ctx.attr.python_version == "3":
