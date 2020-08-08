@@ -388,6 +388,7 @@ python_configure = repository_rule(
         _PYTHON_LIB_PATH,
     ],
     attrs = {
+        "python_bin": attr.string(default=""),
         "python_version": attr.string(default="default"),
     },
 )
